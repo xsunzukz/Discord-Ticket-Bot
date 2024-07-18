@@ -35,11 +35,16 @@ module.exports = {
         )
         .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
     async execute (interaction) {
+        if (!interaction.guild) {
+            return await interaction.reply({ content: `⚠️ This command cannot be used in DMs. Please use it in a server.`, ephemeral: true });
+        }
+
         const { options } = interaction;
         const sub = options.getSubcommand();
         const data = await ticket.findOne({
             Guild: interaction.guild.id
-        })
+        });
+
         switch (sub) {
             case 'send':
                 if (!data) return await interaction.reply({
@@ -59,12 +64,12 @@ module.exports = {
                             description: `Click here to begin the ticket creation process`,
                             value: 'createTicket'
                         })
-                )
+                );
                 const embed = new EmbedBuilder()
                 .setColor('Green')
                 .setTitle('😎 Create a ticket!')
                 .setDescription(message + ` 🎟️`)
-                .setFooter({text: `${interaction.guild.name}`, iconURL: `${interaction.guild.iconURL()}`})
+                .setFooter({text: `${interaction.guild.name}`, iconURL: `${interaction.guild.iconURL()}`});
                 await interaction.reply({content: `🤖 I have sent your ticket message below`, ephemeral: true});
                 await interaction.channel.send({embeds: [embed], components: [select]});
                 break;
