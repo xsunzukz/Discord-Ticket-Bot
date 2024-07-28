@@ -13,7 +13,7 @@ First clone the repo using git
 ``` bash
 npm install
 ```
-Edit the ```.env``` file use your own discord bot token and MongoDB cluster URL, Run the bot
+Edit the ```.env``` file use your own discord bot token, CLient_ID/App ID and MongoDB cluster URL, Run the bot
 
 # Preview
 But first make sure your bot perms are all set up:

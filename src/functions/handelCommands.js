@@ -1,9 +1,8 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
-
-const clientId = '1260239157318385767';
-const guildId = '1258759455567511692'; 
+require('dotenv').config();
+const clientId = process.env.CLIENT_ID;
 
 
 module.exports = (client) => {
